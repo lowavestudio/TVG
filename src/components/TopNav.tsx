@@ -9,10 +9,14 @@ export const TopNav: React.FC = () => {
   return (
     <header className="top-nav" role="banner">
       <div className="top-brand">
-        <span className="brand-badge">ОФК</span>
-        <div className="brand-title">
-          <strong>Озёрская фурнитурная компания</strong>
-          <span style={{ display: 'none', marginLeft: 6, color: 'var(--text-muted)' }}>| Особая поставка</span>
+        <img
+          src="./assets/ofk-logo.webp"
+          alt="ОФК - Озёрская фурнитурная компания"
+          className="brand-logo-img"
+        />
+        <div className="brand-title-box">
+          <span className="brand-title-main">Озёрская фурнитурная компания</span>
+          <span className="brand-title-sub">Особая поставка // 2026-ТВГ</span>
         </div>
       </div>
 
@@ -21,15 +25,15 @@ export const TopNav: React.FC = () => {
         <div className="keys-tracker" title="Статус символических ключей">
           <div className={`key-pill ${keys.key1 ? 'active' : ''}`} title="Ключ 1: Авторитет">
             <span className="key-dot" />
-            <span>I</span>
+            <span>I. АВТОРИТЕТ</span>
           </div>
           <div className={`key-pill ${keys.key2 ? 'active' : ''}`} title="Ключ 2: Точность">
             <span className="key-dot" />
-            <span>II</span>
+            <span>II. ТОЧНОСТЬ</span>
           </div>
           <div className={`key-pill ${keys.key3 ? 'active' : ''}`} title="Ключ 3: Команда">
             <span className="key-dot" />
-            <span>III</span>
+            <span>III. КОМАНДА</span>
           </div>
         </div>
 
@@ -50,7 +54,7 @@ export const TopNav: React.FC = () => {
             type="button"
             className="btn-icon"
             onClick={resetQuest}
-            title="Пройти заново"
+            title="Пройти квест заново"
             aria-label="Пройти квест заново"
           >
             <RotateCcw size={16} />

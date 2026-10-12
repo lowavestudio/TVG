@@ -1,100 +1,60 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuest } from '../context/QuestContext';
 import { QUEST_CONFIG } from '../config/questConfig';
 import { AudioPlayer } from './AudioPlayer';
-import { RotateCcw, Heart, Building, Sparkles, Upload } from 'lucide-react';
+import { RotateCcw, Heart, Building, Sparkles, Award } from 'lucide-react';
 
 export const FinaleScene: React.FC = () => {
   const { resetQuest } = useQuest();
   const person = QUEST_CONFIG.person;
   const finale = QUEST_CONFIG.finale;
 
-  const [previewPhoto, setPreviewPhoto] = useState<string | null>(person.photoUrl);
-
-  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreviewPhoto(url);
-    }
-  };
-
   return (
     <div className="scene-container">
       <div className="finale-section">
-        {/* Карточка виновника торжества */}
-        <div className="director-hero-card">
-          <div className="director-avatar-box">
-            {previewPhoto ? (
-              <img
-                src={previewPhoto}
-                alt={person.fullName}
-                className="director-avatar-img"
-                loading="lazy"
-              />
-            ) : (
-              <div style={{ textAlign: 'center' }}>
-                <span className="director-avatar-monogram">{person.initials}</span>
-                <span style={{ fontSize: 10, color: 'var(--text-muted)', display: 'block', marginTop: -2 }}>
-                  ОФК
-                </span>
-              </div>
-            )}
-
-            {/* Быстрый загрузчик для тестирования фото прямо в браузере */}
-            <label
-              title="Загрузить фото для предпросмотра"
-              style={{
-                position: 'absolute',
-                bottom: 4,
-                right: 4,
-                width: 28,
-                height: 28,
-                borderRadius: '50%',
-                background: 'rgba(0,0,0,0.7)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                border: '1px solid var(--metal-border)',
-              }}
-            >
-              <Upload size={12} color="#fff" />
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handlePhotoUpload}
-                style={{ display: 'none' }}
-              />
-            </label>
+        {/* Представительская гербовая карточка генерального директора (без фото) */}
+        <div className="director-seal-card">
+          {/* Геральдическая печать руководителя ОФК */}
+          <div className="executive-seal">
+            <span className="seal-monogram">{person.initials}</span>
+            <span className="seal-subtext">ОФК · ОЗЁРСК</span>
           </div>
 
-          <div className="director-info-box">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-              <span className="director-role">{person.role}</span>
-              <span style={{ color: 'var(--text-muted)', fontSize: 13 }}>•</span>
-              <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{person.companyShort}</span>
+          <div className="director-dedication-box">
+            <div className="director-title-pill">
+              <Award size={14} color="#E5A93C" />
+              <span>{person.role} · {person.companyShort}</span>
             </div>
+
             <h1>{finale.greetingHeading}</h1>
-            <p className="director-message">{finale.teamMessage}</p>
+            <p className="director-manifesto">{finale.teamMessage}</p>
           </div>
         </div>
 
-        {/* Плеер песни-подарка */}
+        {/* Плеер музыкального подарка команды */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
-            <Sparkles size={20} color="#E5A93C" />
-            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#fff' }}>Музыкальный подарок от команды</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <Sparkles size={22} color="#E5A93C" />
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 28, letterSpacing: '0.04em', color: '#fff', textTransform: 'uppercase' }}>
+              Главный подарок: Музыкальное посвящение
+            </h2>
           </div>
           <AudioPlayer />
         </div>
 
-        {/* Поздравления сотрудников и отделов */}
+        {/* Поздравления от подразделений компании */}
         <div className="team-wishes-section">
-          <h2 className="wishes-heading">
-            <Building size={22} color="#E31E24" />
-            <span>Поздравления подразделений ОФК</span>
-          </h2>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+            <h2 className="wishes-heading">
+              <Building size={26} color="#E31E24" />
+              <span>Послания подразделений компании</span>
+            </h2>
+            <img
+              src="./assets/ofk-logo.webp"
+              alt="ОФК"
+              style={{ height: 32, width: 'auto', opacity: 0.8 }}
+            />
+          </div>
 
           <div className="wishes-grid">
             {finale.departmentGreetings.map((greet) => (
@@ -103,7 +63,7 @@ export const FinaleScene: React.FC = () => {
                   {greet.highlight && <span className="wish-highlight">{greet.highlight}</span>}
                   <p className="wish-text">«{greet.text}»</p>
                 </div>
-                <div>
+                <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 14 }}>
                   <div className="wish-author">{greet.author}</div>
                   <div className="wish-dept">
                     {greet.department} {greet.city && `· ${greet.city}`}
@@ -114,10 +74,10 @@ export const FinaleScene: React.FC = () => {
           </div>
         </div>
 
-        {/* Финальная подпись и перезапуск */}
+        {/* Финальная подпись и перезапуск квеста */}
         <div style={{ textAlign: 'center', padding: '36px 0 16px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 18, fontWeight: 700, color: 'var(--accent-gold)', marginBottom: 20 }}>
-            <Heart size={20} fill="#E5A93C" />
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-heading)', fontSize: 20, color: 'var(--accent-gold)', textTransform: 'uppercase', marginBottom: 20 }}>
+            <Heart size={22} fill="#E5A93C" />
             <span>{finale.signature}</span>
           </div>
 
@@ -126,10 +86,10 @@ export const FinaleScene: React.FC = () => {
               type="button"
               className="btn-secondary"
               onClick={resetQuest}
-              style={{ minHeight: 46 }}
+              style={{ minHeight: 48 }}
             >
               <RotateCcw size={16} />
-              <span>Пройти приключение заново</span>
+              <span>Пройти испытание заново</span>
             </button>
           </div>
         </div>

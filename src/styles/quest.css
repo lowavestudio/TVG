@@ -1,42 +1,68 @@
 /* ==========================================================================
-   ОФК — Допуск к подарку
-   Премиальная визуальная дизайн-система в стиле презентаций Apple & ОФК
+   ОФК — ДОПУСК К ПОДАРКУ // ИНДУСТРИАЛЬНЫЙ ПРЕМИАЛЬНЫЙ ДИЗАЙН
+   Шрифты: Bebas Neue, Peace Sans, Didact Gothic, IBM Plex Mono
    ========================================================================== */
 
+/* Локальные шрифты */
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('../fonts/bebas_neue.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Peace Sans';
+  src: url('../fonts/peace_sans.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Didact Gothic';
+  src: url('../fonts/didact_gothic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --bg-primary: #121417;
-  --bg-secondary: #16191E;
-  --bg-surface: #1C2027;
-  --bg-surface-elevated: #242932;
-  --bg-surface-active: #2C333E;
+  --bg-primary: #0F1115;
+  --bg-secondary: #15181E;
+  --bg-surface: #1B1F27;
+  --bg-surface-elevated: #242934;
+  --bg-surface-active: #2C3340;
   
-  --text-primary: #F5F6F8;
-  --text-secondary: #A2A7B0;
-  --text-muted: #6B7280;
+  --text-primary: #F4F5F8;
+  --text-secondary: #A0A5B2;
+  --text-muted: #666C7A;
   
   --accent-red: #E31E24;
   --accent-red-hover: #F0282E;
-  --accent-red-glow: rgba(227, 30, 36, 0.32);
+  --accent-red-glow: rgba(227, 30, 36, 0.4);
   
   --accent-gold: #E5A93C;
   --accent-gold-soft: #D9B98A;
-  --accent-gold-glow: rgba(229, 169, 60, 0.28);
+  --accent-gold-glow: rgba(229, 169, 60, 0.35);
+
+  --steel-border: rgba(255, 255, 255, 0.12);
+  --steel-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 100%);
   
-  --metal-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
-  --metal-border: rgba(255, 255, 255, 0.1);
-  --metal-border-active: rgba(229, 169, 60, 0.5);
-  
-  --font-main: 'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'IBM Plex Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* Шрифтовые пары */
+  --font-display: 'Bebas Neue', 'Peace Sans', 'Oswald', sans-serif;
+  --font-heading: 'Peace Sans', 'Bebas Neue', sans-serif;
+  --font-body: 'Didact Gothic', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', SFMono-Regular, monospace;
   
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-mechanical: cubic-bezier(0.2, 0.8, 0.2, 1);
   
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-  --radius-full: 9999px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
   
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -53,36 +79,41 @@ html, body {
   min-height: 100%;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-main);
-  line-height: 1.5;
+  font-family: var(--font-body);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Фон с деликатным радиальным свечением */
+/* Приложение с фоновой технической сеткой (CAD Blueprint Grid) */
 .quest-app {
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   position: relative;
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(227, 30, 36, 0.12), transparent),
-    radial-gradient(ellipse 60% 40% at 50% 110%, rgba(229, 169, 60, 0.08), transparent),
-    var(--bg-primary);
+  background-color: var(--bg-primary);
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    radial-gradient(ellipse 90% 40% at 50% 0%, rgba(227, 30, 36, 0.15), transparent 75%),
+    radial-gradient(ellipse 70% 35% at 50% 100%, rgba(229, 169, 60, 0.1), transparent 75%);
+  background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
 }
 
-/* Верхняя панель управления */
+/* ==========================================================================
+   ШАПКА (TOP NAV)
+   ========================================================================== */
 .top-nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(18, 20, 23, 0.85);
-  border-bottom: 1px solid var(--metal-border);
-  padding: calc(12px + var(--safe-top)) 20px 12px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(15, 17, 21, 0.9);
+  border-bottom: 1px solid var(--steel-border);
+  padding: calc(10px + var(--safe-top)) 24px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -91,63 +122,108 @@ html, body {
 .top-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-decoration: none;
   color: inherit;
 }
 
-.brand-badge {
-  background: var(--accent-red);
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(227, 30, 36, 0.35));
+}
+
+.brand-title-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title-main {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  letter-spacing: 0.06em;
   color: #fff;
-  font-weight: 800;
-  font-size: 13px;
-  letter-spacing: 0.05em;
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  display: inline-flex;
-  align-items: center;
-  box-shadow: 0 2px 10px var(--accent-red-glow);
+  line-height: 1.1;
+  text-transform: uppercase;
 }
 
-.brand-title {
-  font-size: 13px;
-  color: var(--text-secondary);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-}
-
-.brand-title strong {
-  color: var(--text-primary);
+.brand-title-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
 }
 
 .top-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
-/* Кнопки со стандартом минимум 44x44px */
+/* Индикатор ключей (Металлические индикаторы с заклепками) */
+.keys-tracker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--steel-border);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.key-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  transition: all 0.25s var(--ease-spring);
+}
+
+.key-pill.active {
+  color: var(--accent-gold);
+}
+
+.key-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.25s var(--ease-spring);
+}
+
+.key-pill.active .key-dot {
+  background: var(--accent-gold);
+  box-shadow: 0 0 10px var(--accent-gold);
+}
+
+/* Кнопки-контролы 44px */
 .btn-icon {
   min-width: 44px;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   background: var(--bg-surface);
-  border: 1px solid var(--metal-border);
+  border: 1px solid var(--steel-border);
   color: var(--text-primary);
   cursor: pointer;
-  transition: transform 0.16s var(--ease-spring), background 0.16s ease, border-color 0.16s ease;
+  transition: all 0.15s var(--ease-spring);
 }
 
 .btn-icon:hover {
   background: var(--bg-surface-elevated);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
 }
 
 .btn-icon:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
 .btn-icon:focus-visible {
@@ -155,69 +231,29 @@ html, body {
   outline-offset: 2px;
 }
 
-/* Индикатор ключей в навигации */
-.keys-tracker {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--metal-border);
-  padding: 6px 12px;
-  border-radius: var(--radius-full);
-}
-
-.key-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-family: var(--font-mono);
-  color: var(--text-muted);
-  transition: color 0.3s ease;
-}
-
-.key-pill.active {
-  color: var(--accent-gold);
-  font-weight: 600;
-}
-
-.key-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transition: all 0.3s var(--ease-spring);
-}
-
-.key-pill.active .key-dot {
-  background: var(--accent-gold);
-  box-shadow: 0 0 8px var(--accent-gold-glow);
-  transform: scale(1.2);
-}
-
-/* Контейнер сцены */
+/* ==========================================================================
+   ОСНОВНАЯ СЦЕНА
+   ========================================================================== */
 .main-stage {
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 1080px;
+  max-width: 1040px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 20px calc(40px + var(--safe-bottom));
+  padding: 32px 24px calc(50px + var(--safe-bottom));
 }
 
-/* Анимация перехода сцен */
 .scene-container {
   display: flex;
   flex-direction: column;
-  animation: sceneFadeIn 0.45s var(--ease-spring) forwards;
-  will-change: transform, opacity;
+  animation: sceneEnter 0.4s var(--ease-spring) forwards;
 }
 
-@keyframes sceneFadeIn {
+@keyframes sceneEnter {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -228,88 +264,95 @@ html, body {
 /* Типографика сцен */
 .scene-kicker {
   font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.16em;
+  font-size: 12px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent-gold-soft);
+  color: var(--accent-gold);
   margin-bottom: 12px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .scene-kicker::before {
   content: '';
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background: var(--accent-red);
-  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-red);
+  border-radius: 2px;
 }
 
 .scene-title {
-  font-size: clamp(26px, 4.2vw, 44px);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1.14;
+  font-family: var(--font-display);
+  font-size: clamp(38px, 6vw, 68px);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
   color: #fff;
-  margin-bottom: 14px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
 }
 
 .scene-desc {
-  font-size: clamp(15px, 1.8vw, 17px);
+  font-family: var(--font-body);
+  font-size: clamp(16px, 2vw, 18px);
   color: var(--text-secondary);
   line-height: 1.6;
-  max-width: 680px;
-  margin-bottom: 32px;
+  max-width: 720px;
+  margin-bottom: 34px;
 }
 
-/* ==========================================
-   Центральный визуальный объект: КЕЙС ОФК
-   ========================================== */
+/* ==========================================================================
+   КЕЙС СПЕЦИАЛЬНОЙ ПОСТАВКИ ОФК (PRECISION HARDWARE VAULT)
+   ========================================================================== */
 .vault-case-wrapper {
   position: relative;
-  margin: 20px 0 36px;
+  margin: 10px 0 36px;
   display: flex;
   justify-content: center;
 }
 
 .vault-case {
   width: 100%;
-  max-width: 620px;
-  background: linear-gradient(160deg, #20242B 0%, #15181D 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-xl);
-  padding: 32px 28px;
+  max-width: 660px;
+  background: linear-gradient(170deg, #1E232C 0%, #12141A 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-lg);
+  padding: 32px 30px;
   box-shadow: 
-    0 24px 60px -12px rgba(0, 0, 0, 0.65),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 30px 70px -10px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
 }
 
-.vault-case::before {
+/* Заклёпки на углах кейса */
+.vault-case::before,
+.vault-case::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 20%;
-  right: 20%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(229, 169, 60, 0.6), transparent);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3A414E;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.2);
 }
+.vault-case::before { top: 12px; left: 12px; }
+.vault-case::after { top: 12px; right: 12px; }
 
 .vault-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 16px;
   margin-bottom: 24px;
 }
 
 .vault-tag {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
   color: var(--text-muted);
 }
 
@@ -317,23 +360,25 @@ html, body {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 600;
+  letter-spacing: 0.05em;
   color: var(--accent-gold);
 }
 
 .vault-status-pulse {
   width: 8px;
   height: 8px;
-  background: var(--accent-gold);
   border-radius: 50%;
+  background: var(--accent-gold);
   box-shadow: 0 0 10px var(--accent-gold);
-  animation: statusPulse 2s infinite ease-in-out;
+  animation: pulseLight 1.8s infinite ease-in-out;
 }
 
-@keyframes statusPulse {
-  0%, 100% { opacity: 0.4; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.15); }
+@keyframes pulseLight {
+  0%, 100% { opacity: 0.35; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
 /* 3 секции / ячейки ключей в кейсе */
@@ -341,14 +386,21 @@ html, body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
+}
+
+@media (max-width: 580px) {
+  .vault-chambers-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }
 
 .chamber-cell {
-  background: rgba(18, 20, 24, 0.7);
-  border: 1px dashed rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-lg);
-  padding: 20px 14px;
+  background: rgba(14, 16, 20, 0.85);
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-md);
+  padding: 22px 14px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -358,16 +410,17 @@ html, body {
 }
 
 .chamber-cell.unlocked {
-  background: linear-gradient(180deg, rgba(229, 169, 60, 0.12) 0%, rgba(20, 24, 28, 0.8) 100%);
-  border: 1px solid var(--accent-gold);
-  box-shadow: 0 0 20px rgba(229, 169, 60, 0.15);
+  background: linear-gradient(180deg, rgba(229, 169, 60, 0.15) 0%, rgba(18, 21, 26, 0.95) 100%);
+  border: 1.5px solid var(--accent-gold);
+  box-shadow: 0 0 25px rgba(229, 169, 60, 0.2);
 }
 
 .chamber-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.05);
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -377,16 +430,18 @@ html, body {
 }
 
 .chamber-cell.unlocked .chamber-icon {
-  background: rgba(229, 169, 60, 0.2);
+  background: rgba(229, 169, 60, 0.22);
+  border-color: var(--accent-gold);
   color: var(--accent-gold);
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .chamber-label {
-  font-size: 13.5px;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  letter-spacing: 0.04em;
   color: var(--text-secondary);
-  letter-spacing: -0.01em;
+  text-transform: uppercase;
   margin-bottom: 4px;
 }
 
@@ -396,10 +451,9 @@ html, body {
 
 .chamber-state-text {
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 .chamber-cell.unlocked .chamber-state-text {
@@ -407,34 +461,37 @@ html, body {
   font-weight: 600;
 }
 
-/* Главная кнопка действия */
+/* ==========================================================================
+   КНОПКИ
+   ========================================================================== */
 .btn-primary {
-  min-height: 52px;
-  padding: 14px 28px;
-  background: linear-gradient(180deg, #E8272D 0%, #C41419 100%);
+  min-height: 54px;
+  padding: 14px 34px;
+  background: linear-gradient(180deg, #ED262D 0%, #BA1419 100%);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-md);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   box-shadow: 
-    0 8px 24px var(--accent-red-glow),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transition: transform 0.16s var(--ease-spring), box-shadow 0.16s ease, background 0.16s ease;
+    0 10px 28px var(--accent-red-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: all 0.16s var(--ease-spring);
   user-select: none;
   text-decoration: none;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(180deg, #F53239 0%, #D4171D 100%);
-  box-shadow: 0 12px 30px rgba(227, 30, 36, 0.45);
-  transform: translateY(-1px);
+  background: linear-gradient(180deg, #F8363D 0%, #CE191F 100%);
+  box-shadow: 0 14px 36px rgba(227, 30, 36, 0.55);
+  transform: translateY(-2px);
 }
 
 .btn-primary:active {
@@ -448,24 +505,27 @@ html, body {
 
 .btn-secondary {
   min-height: 48px;
-  padding: 12px 22px;
+  padding: 12px 24px;
   background: var(--bg-surface);
   color: var(--text-primary);
-  border: 1px solid var(--metal-border);
-  border-radius: var(--radius-md);
-  font-size: 14.5px;
-  font-weight: 600;
+  border: 1px solid var(--steel-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   transition: all 0.16s var(--ease-spring);
 }
 
 .btn-secondary:hover {
   background: var(--bg-surface-elevated);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
 }
 
 .btn-secondary:active {
@@ -475,52 +535,53 @@ html, body {
 /* Кнопка «Полномочия директора: пропустить» */
 .btn-director-skip {
   background: transparent;
-  border: 1px dashed rgba(255, 255, 255, 0.16);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
   color: var(--text-muted);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 10px 16px;
-  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   transition: all 0.2s ease;
-  margin-top: 20px;
+  margin-top: 24px;
   align-self: center;
 }
 
 .btn-director-skip:hover {
   color: var(--accent-gold);
   border-color: var(--accent-gold);
-  background: rgba(229, 169, 60, 0.05);
+  background: rgba(229, 169, 60, 0.06);
 }
 
-/* ==========================================
-   ИСПЫТАНИЕ 1: Вопросы по цитатам
-   ========================================== */
+/* ==========================================================================
+   ИСПЫТАНИЕ 1: ВОПРОСЫ ПО ЦИТАТАМ
+   ========================================================================== */
 .quiz-card {
   background: var(--bg-secondary);
-  border: 1px solid var(--metal-border);
-  border-radius: var(--radius-xl);
-  padding: 32px 28px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--steel-border);
+  border-radius: var(--radius-lg);
+  padding: 36px 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 .quiz-prompt-box {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-  border-left: 3px solid var(--accent-gold);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 22px 26px;
   margin-bottom: 28px;
 }
 
 .quiz-quote-text {
-  font-size: clamp(18px, 2.4vw, 22px);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 34px);
+  letter-spacing: 0.03em;
   color: #fff;
-  letter-spacing: -0.015em;
-  line-height: 1.35;
+  line-height: 1.15;
 }
 
 .quiz-options-list {
@@ -531,41 +592,37 @@ html, body {
 
 .quiz-option-button {
   width: 100%;
-  min-height: 58px;
-  padding: 16px 20px;
+  min-height: 60px;
+  padding: 16px 22px;
   text-align: left;
   background: var(--bg-surface);
-  border: 1.5px solid var(--metal-border);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--steel-border);
+  border-radius: var(--radius-sm);
   color: var(--text-primary);
-  font-size: 15.5px;
-  font-weight: 500;
-  line-height: 1.4;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.45;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   transition: all 0.16s var(--ease-spring);
 }
 
 .quiz-option-button:hover:not(:disabled) {
   background: var(--bg-surface-elevated);
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateX(4px);
 }
 
-.quiz-option-button:active:not(:disabled) {
-  transform: scale(0.99);
-}
-
 .quiz-option-letter {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: 0.05em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -575,7 +632,7 @@ html, body {
 
 .quiz-option-button.correct {
   border-color: #22c55e;
-  background: rgba(34, 197, 94, 0.12);
+  background: rgba(34, 197, 94, 0.14);
   color: #fff;
 }
 
@@ -586,17 +643,16 @@ html, body {
 
 .quiz-option-button.incorrect {
   border-color: #ef4444;
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--text-secondary);
+  background: rgba(239, 68, 68, 0.12);
 }
 
 .quiz-feedback-box {
   margin-top: 24px;
-  padding: 18px 20px;
-  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 16px;
   animation: fadeInFeedback 0.25s ease-out;
 }
 
@@ -607,19 +663,19 @@ html, body {
 
 .quiz-feedback-box.correct {
   background: rgba(34, 197, 94, 0.12);
-  border: 1px solid rgba(34, 197, 94, 0.3);
+  border: 1px solid rgba(34, 197, 94, 0.4);
   color: #86efac;
 }
 
 .quiz-feedback-box.incorrect {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
   color: #fca5a5;
 }
 
-/* ==========================================
-   ИСПЫТАНИЕ 2: Идеальный механизм
-   ========================================== */
+/* ==========================================================================
+   ИСПЫТАНИЕ 2: ИДЕАЛЬНЫЙ МЕХАНИЗМ (ВЕРСТАК СБОРКИ)
+   ========================================================================== */
 .mechanism-interactive-area {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -633,40 +689,29 @@ html, body {
   }
 }
 
-/* Механический верстак */
 .assembly-bench {
   background: var(--bg-secondary);
-  border: 1px solid var(--metal-border);
-  border-radius: var(--radius-xl);
+  border: 1px solid var(--steel-border);
+  border-radius: var(--radius-lg);
   padding: 28px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 380px;
-  position: relative;
-  overflow: hidden;
-}
-
-.assembly-bench::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
-  pointer-events: none;
+  min-height: 390px;
 }
 
 .bench-slots-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   margin: 18px 0;
 }
 
 .bench-slot {
-  border: 1.5px dashed rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius-lg);
+  border: 1.5px dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
   padding: 16px 18px;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -676,38 +721,34 @@ html, body {
 }
 
 .bench-slot:hover {
-  border-color: rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .bench-slot.target-highlight {
   border-color: var(--accent-gold);
   border-style: solid;
-  background: rgba(229, 169, 60, 0.08);
-  box-shadow: 0 0 16px var(--accent-gold-glow);
-  transform: scale(1.01);
+  background: rgba(229, 169, 60, 0.1);
+  box-shadow: 0 0 18px var(--accent-gold-glow);
 }
 
 .bench-slot.filled {
   border-style: solid;
-  border-color: rgba(34, 197, 94, 0.4);
-  background: linear-gradient(90deg, rgba(34, 197, 94, 0.08) 0%, rgba(22, 26, 32, 0.6) 100%);
-}
-
-.slot-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  border-color: rgba(34, 197, 94, 0.45);
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.1) 0%, rgba(20, 24, 30, 0.7) 100%);
 }
 
 .slot-title {
-  font-size: 14.5px;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  letter-spacing: 0.03em;
   color: #fff;
+  text-transform: uppercase;
 }
 
 .slot-hint {
-  font-size: 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
   color: var(--text-muted);
 }
 
@@ -715,7 +756,7 @@ html, body {
   font-family: var(--font-mono);
   font-size: 11px;
   padding: 4px 10px;
-  border-radius: var(--radius-sm);
+  border-radius: 4px;
   background: rgba(255, 255, 255, 0.06);
   color: var(--text-secondary);
 }
@@ -725,7 +766,6 @@ html, body {
   color: #86efac;
 }
 
-/* Детали для установки */
 .parts-rack {
   display: flex;
   flex-direction: column;
@@ -734,8 +774,8 @@ html, body {
 
 .part-card {
   background: var(--bg-surface);
-  border: 1px solid var(--metal-border);
-  border-radius: var(--radius-lg);
+  border: 1px solid var(--steel-border);
+  border-radius: var(--radius-sm);
   padding: 16px 18px;
   display: flex;
   align-items: center;
@@ -747,70 +787,52 @@ html, body {
 
 .part-card:hover:not(.installed) {
   background: var(--bg-surface-elevated);
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
 }
 
 .part-card.selected {
   border-color: var(--accent-gold);
-  background: rgba(229, 169, 60, 0.1);
+  background: rgba(229, 169, 60, 0.12);
   box-shadow: 0 0 16px var(--accent-gold-glow);
-  transform: translateY(-2px);
 }
 
 .part-card.installed {
-  opacity: 0.45;
+  opacity: 0.4;
   cursor: default;
-  filter: grayscale(0.5);
-}
-
-.part-icon-box {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-gold);
-  flex-shrink: 0;
-}
-
-.part-details {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  filter: grayscale(0.6);
 }
 
 .part-name {
+  font-family: var(--font-heading);
   font-size: 14.5px;
-  font-weight: 700;
   color: #fff;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .part-desc {
-  font-size: 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
   color: var(--text-secondary);
 }
 
-/* Анимация кинетического движения собранного механизма */
 .mechanism-active-kinetic {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
   padding: 24px;
-  background: linear-gradient(135deg, rgba(229, 169, 60, 0.1) 0%, rgba(227, 30, 36, 0.08) 100%);
-  border: 1px solid var(--accent-gold);
-  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, rgba(229, 169, 60, 0.12) 0%, rgba(227, 30, 36, 0.1) 100%);
+  border: 1.5px solid var(--accent-gold);
+  border-radius: var(--radius-md);
   margin-top: 16px;
   animation: kineticGlow 3s infinite alternate;
 }
 
 @keyframes kineticGlow {
-  0% { box-shadow: 0 0 20px rgba(229, 169, 60, 0.15); }
-  100% { box-shadow: 0 0 35px rgba(229, 169, 60, 0.35); }
+  0% { box-shadow: 0 0 20px rgba(229, 169, 60, 0.2); }
+  100% { box-shadow: 0 0 40px rgba(229, 169, 60, 0.4); }
 }
 
 .gear-icon {
@@ -822,60 +844,60 @@ html, body {
   to { transform: rotate(360deg); }
 }
 
-/* ==========================================
-   ИСПЫТАНИЕ 3: Решения генерального
-   ========================================== */
+/* ==========================================================================
+   ИСПЫТАНИЕ 3: РЕШЕНИЯ ГЕНЕРАЛЬНОГО
+   ========================================================================== */
 .situation-card {
   background: var(--bg-secondary);
-  border: 1px solid var(--metal-border);
-  border-radius: var(--radius-xl);
-  padding: 32px 28px;
-}
-
-.situation-header {
-  margin-bottom: 24px;
+  border: 1px solid var(--steel-border);
+  border-radius: var(--radius-lg);
+  padding: 36px 30px;
 }
 
 .situation-narrative {
-  font-size: clamp(17px, 2.2vw, 20px);
-  font-weight: 600;
-  line-height: 1.45;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.2vw, 30px);
+  letter-spacing: 0.03em;
+  line-height: 1.15;
   color: #fff;
   background: rgba(255, 255, 255, 0.03);
-  padding: 20px 22px;
-  border-radius: var(--radius-md);
-  border-left: 3px solid var(--accent-red);
+  padding: 22px 24px;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--accent-red);
+  margin-bottom: 24px;
 }
 
 .verdict-banner {
   margin-top: 24px;
-  padding: 20px 24px;
-  background: linear-gradient(135deg, rgba(229, 169, 60, 0.12) 0%, rgba(22, 26, 32, 0.9) 100%);
+  padding: 22px 26px;
+  background: linear-gradient(135deg, rgba(229, 169, 60, 0.14) 0%, rgba(20, 24, 30, 0.95) 100%);
   border: 1px solid var(--accent-gold);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   animation: fadeInFeedback 0.3s ease-out;
 }
 
 .verdict-text {
-  font-size: 14.5px;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  letter-spacing: 0.04em;
   color: var(--accent-gold);
-  margin-bottom: 6px;
+  text-transform: uppercase;
 }
 
 .verdict-reaction {
-  font-size: 15px;
+  font-family: var(--font-body);
+  font-size: 16px;
   color: #fff;
-  font-style: italic;
+  margin-top: 6px;
 }
 
-/* ==========================================
-   СЦЕНА 5: Открытие подарка
-   ========================================== */
+/* ==========================================================================
+   СЦЕНА 5: ОТКРЫТИЕ ПОДАРКА
+   ========================================================================== */
 .opening-stage {
   text-align: center;
-  max-width: 680px;
-  margin: 40px auto;
+  max-width: 720px;
+  margin: 30px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -883,180 +905,201 @@ html, body {
 
 .open-case-visual {
   position: relative;
-  width: 220px;
-  height: 220px;
-  margin-bottom: 36px;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 30px;
 }
 
 .open-case-core {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(229, 169, 60, 0.25) 0%, rgba(227, 30, 36, 0.1) 70%, transparent 100%);
+  background: radial-gradient(circle, rgba(229, 169, 60, 0.3) 0%, rgba(227, 30, 36, 0.15) 70%, transparent 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 2px solid var(--accent-gold);
-  box-shadow: 0 0 50px rgba(229, 169, 60, 0.35);
+  box-shadow: 0 0 60px rgba(229, 169, 60, 0.45);
   animation: openingPulse 2s infinite alternate;
 }
 
 @keyframes openingPulse {
-  0% { transform: scale(0.96); box-shadow: 0 0 35px rgba(229, 169, 60, 0.25); }
-  100% { transform: scale(1.04); box-shadow: 0 0 65px rgba(229, 169, 60, 0.5); }
+  0% { transform: scale(0.96); box-shadow: 0 0 35px rgba(229, 169, 60, 0.3); }
+  100% { transform: scale(1.05); box-shadow: 0 0 70px rgba(229, 169, 60, 0.6); }
 }
 
 .epigraph-box {
-  margin: 28px 0 34px;
+  margin: 20px 0 30px;
 }
 
 .epigraph-line1 {
-  font-size: clamp(20px, 2.8vw, 26px);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4vw, 38px);
+  letter-spacing: 0.04em;
   color: #fff;
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 
 .epigraph-line2 {
-  font-size: clamp(18px, 2.4vw, 22px);
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.8vw, 26px);
   color: var(--accent-gold);
-  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-/* ==========================================
-   СЦЕНА 6: Песня и поздравление
-   ========================================== */
+/* ==========================================================================
+   СЦЕНА 6: ФИНАЛ — ГЕРБОВАЯ КАРТОЧКА РУКОВОДИТЕЛЯ (БЕЗ ФОТО)
+   ========================================================================== */
 .finale-section {
   display: flex;
   flex-direction: column;
   gap: 36px;
 }
 
-/* Карточка директора */
-.director-hero-card {
-  background: linear-gradient(145deg, #1E2229 0%, #14171B 100%);
-  border: 1px solid var(--metal-border);
-  border-radius: var(--radius-xl);
-  padding: 32px 30px;
+.director-seal-card {
+  background: linear-gradient(155deg, #1D222A 0%, #121419 100%);
+  border: 1.5px solid var(--steel-border);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 28px;
+  gap: 36px;
   align-items: center;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
   position: relative;
   overflow: hidden;
 }
 
-@media (max-width: 640px) {
-  .director-hero-card {
+@media (max-width: 720px) {
+  .director-seal-card {
     grid-template-columns: 1fr;
     text-align: center;
+    padding: 30px 20px;
   }
 }
 
-.director-avatar-box {
-  width: 130px;
-  height: 130px;
+/* Гербовая печать Генерального директора ОФК */
+.executive-seal {
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2D333D 0%, #1A1D24 100%);
+  background: radial-gradient(circle at 35% 35%, #2A313D 0%, #13161C 100%);
   border: 3px solid var(--accent-gold);
-  box-shadow: 0 0 25px rgba(229, 169, 60, 0.25);
+  box-shadow: 
+    0 0 30px rgba(229, 169, 60, 0.3),
+    inset 0 0 20px rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
   position: relative;
-  overflow: hidden;
   flex-shrink: 0;
 }
 
-.director-avatar-monogram {
-  font-family: var(--font-mono);
-  font-size: 32px;
-  font-weight: 800;
+.executive-seal::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px dashed rgba(229, 169, 60, 0.4);
+  border-radius: 50%;
+}
+
+.seal-monogram {
+  font-family: var(--font-display);
+  font-size: 52px;
+  letter-spacing: 0.08em;
   color: var(--accent-gold);
-  letter-spacing: 0.05em;
+  line-height: 1;
+  text-shadow: 0 2px 10px rgba(229, 169, 60, 0.4);
 }
 
-.director-avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.seal-subtext {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: -4px;
 }
 
-.director-info-box h1 {
-  font-size: clamp(24px, 3.6vw, 36px);
-  font-weight: 800;
-  letter-spacing: -0.025em;
+.director-dedication-box h1 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5.5vw, 54px);
+  letter-spacing: 0.04em;
   color: #fff;
-  line-height: 1.15;
-  margin-bottom: 8px;
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin-bottom: 12px;
 }
 
-.director-info-box .director-role {
+.director-title-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: rgba(227, 30, 36, 0.15);
+  border: 1px solid rgba(227, 30, 36, 0.4);
+  border-radius: 4px;
   font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--accent-gold);
+  font-size: 12px;
+  color: #fff;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
-.director-info-box .director-message {
-  font-size: 15px;
+.director-manifesto {
+  font-family: var(--font-body);
+  font-size: 17px;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
-/* ==========================================
-   Аудиоплеер
-   ========================================== */
+/* ==========================================================================
+   АУДИОПЛЕЕР — КОНСОЛЬ МАСТЕР-ТРЕКА
+   ========================================================================== */
 .audio-player-card {
   background: var(--bg-secondary);
-  border: 1px solid var(--metal-border);
-  border-radius: var(--radius-xl);
-  padding: 28px 24px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--steel-border);
+  border-radius: var(--radius-lg);
+  padding: 30px 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 .player-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.song-title-group {
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 22px;
 }
 
 .song-name {
-  font-size: 19px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 0.04em;
   color: #fff;
-  letter-spacing: -0.01em;
+  text-transform: uppercase;
 }
 
 .song-artist {
-  font-size: 13.5px;
-  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--accent-gold-soft);
+  letter-spacing: 0.05em;
 }
 
-/* Канвас визуализатора частот */
 .visualizer-canvas-container {
-  height: 64px;
+  height: 72px;
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: var(--radius-md);
-  margin-bottom: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  margin-bottom: 22px;
   overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .visualizer-canvas {
@@ -1065,60 +1108,36 @@ html, body {
   display: block;
 }
 
-/* Прогресс-бар */
 .scrubber-container {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 14px;
+  margin-bottom: 24px;
 }
 
 .time-stamp {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--text-muted);
-  min-width: 42px;
+  min-width: 44px;
 }
 
 .progress-track {
   flex: 1;
   height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-full);
-  position: relative;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
   cursor: pointer;
   outline: none;
+  accent-color: var(--accent-red);
 }
 
-.progress-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent-red) 0%, var(--accent-gold) 100%);
-  border-radius: var(--radius-full);
-  pointer-events: none;
-}
-
-.progress-thumb {
-  position: absolute;
-  top: 50%;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-/* Контролы плеера */
 .player-controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 16px;
 }
 
 .primary-controls {
@@ -1128,22 +1147,22 @@ html, body {
 }
 
 .play-pause-btn {
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: var(--accent-red);
+  background: linear-gradient(180deg, #ED262D 0%, #BA1419 100%);
   color: #fff;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 6px 20px var(--accent-red-glow);
-  transition: transform 0.16s var(--ease-spring), background 0.16s ease;
+  box-shadow: 0 8px 25px var(--accent-red-glow);
+  transition: all 0.16s var(--ease-spring);
 }
 
 .play-pause-btn:hover {
-  background: var(--accent-red-hover);
+  background: linear-gradient(180deg, #F8363D 0%, #CE191F 100%);
   transform: scale(1.06);
 }
 
@@ -1151,70 +1170,75 @@ html, body {
   transform: scale(0.96);
 }
 
-/* Текст песни (аккордеон) */
 .lyrics-drawer {
   margin-top: 24px;
-  border-top: 1px solid var(--metal-border);
-  padding-top: 18px;
+  border-top: 1px solid var(--steel-border);
+  padding-top: 20px;
 }
 
 .lyrics-content {
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: var(--radius-md);
-  padding: 20px 24px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 22px 26px;
   margin-top: 14px;
-  font-size: 15px;
+  font-family: var(--font-body);
+  font-size: 16px;
   line-height: 1.8;
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .lyrics-verse-title {
-  font-family: var(--font-mono);
-  font-size: 12px;
+  font-family: var(--font-heading);
+  font-size: 13px;
   color: var(--accent-gold);
-  margin-top: 12px;
+  margin-top: 14px;
   margin-bottom: 4px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
-/* Поздравления отделов */
+/* ==========================================================================
+   ПОЗДРАВЛЕНИЯ ПОДРАЗДЕЛЕНИЙ ОФК (СЛУЖЕБНЫЕ КАРТОЧКИ ПОСТАВКИ)
+   ========================================================================== */
 .team-wishes-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .wishes-heading {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: 32px;
+  letter-spacing: 0.04em;
   color: #fff;
+  text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .wishes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
 .wish-card {
   background: var(--bg-surface);
-  border: 1px solid var(--metal-border);
-  border-radius: var(--radius-lg);
-  padding: 22px 20px;
+  border: 1px solid var(--steel-border);
+  border-radius: var(--radius-md);
+  padding: 24px 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.2s var(--ease-smooth);
+  transition: all 0.2s var(--ease-spring);
+  position: relative;
 }
 
 .wish-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .wish-highlight {
@@ -1222,44 +1246,53 @@ html, body {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 3px 9px;
-  border-radius: var(--radius-sm);
-  background: rgba(229, 169, 60, 0.12);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(229, 169, 60, 0.15);
+  border: 1px solid rgba(229, 169, 60, 0.3);
   color: var(--accent-gold);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .wish-text {
-  font-size: 14.5px;
+  font-family: var(--font-body);
+  font-size: 15.5px;
   color: var(--text-primary);
-  line-height: 1.55;
-  margin-bottom: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
 
 .wish-author {
-  font-size: 13px;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  letter-spacing: 0.04em;
   color: #fff;
+  text-transform: uppercase;
 }
 
 .wish-dept {
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
   color: var(--text-muted);
 }
 
-/* Подвал */
+/* ==========================================================================
+   ПОДВАЛ
+   ========================================================================== */
 .quest-footer {
   margin-top: auto;
-  border-top: 1px solid var(--metal-border);
-  padding: 24px 20px calc(24px + var(--safe-bottom));
+  border-top: 1px solid var(--steel-border);
+  padding: 28px 24px calc(28px + var(--safe-bottom));
   text-align: center;
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   color: var(--text-muted);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .quest-footer a {
@@ -1271,27 +1304,24 @@ html, body {
   color: var(--accent-red);
 }
 
-/* Демо-режим бейдж */
 .demo-banner {
   background: rgba(229, 169, 60, 0.08);
   border: 1px solid rgba(229, 169, 60, 0.25);
   color: var(--accent-gold-soft);
-  font-size: 12px;
-  padding: 8px 14px;
-  border-radius: var(--radius-md);
-  margin-bottom: 20px;
+  font-size: 12.5px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

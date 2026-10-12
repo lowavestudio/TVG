@@ -32,8 +32,13 @@ export const App: React.FC = () => {
         <TopNav />
         <QuestRouter />
         <footer className="quest-footer" role="contentinfo">
-          <div>
-            © {new Date().getFullYear()} {QUEST_CONFIG.person.company}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+            <img
+              src="./assets/ofk-logo.webp"
+              alt="ОФК"
+              style={{ height: 24, width: 'auto', opacity: 0.85 }}
+            />
+            <span>© {new Date().getFullYear()} {QUEST_CONFIG.person.company}</span>
           </div>
           <div>
             <a
@@ -45,7 +50,7 @@ export const App: React.FC = () => {
               www.ofk-ozersk.ru
             </a>
             {' · '}
-            <span>Специальный проект ко дню рождения</span>
+            <span>Специальный проект ко дню рождения генерального директора</span>
           </div>
         </footer>
       </div>
