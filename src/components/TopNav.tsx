@@ -25,15 +25,15 @@ export const TopNav: React.FC = () => {
         <div className="keys-tracker" title="Статус символических ключей">
           <div className={`key-pill ${keys.key1 ? 'active' : ''}`} title="Ключ 1: Авторитет">
             <span className="key-dot" />
-            <span>I. АВТОРИТЕТ</span>
+            <span>I<span className="key-text-desktop">. АВТОРИТЕТ</span></span>
           </div>
           <div className={`key-pill ${keys.key2 ? 'active' : ''}`} title="Ключ 2: Точность">
             <span className="key-dot" />
-            <span>II. ТОЧНОСТЬ</span>
+            <span>II<span className="key-text-desktop">. ТОЧНОСТЬ</span></span>
           </div>
           <div className={`key-pill ${keys.key3 ? 'active' : ''}`} title="Ключ 3: Команда">
             <span className="key-dot" />
-            <span>III. КОМАНДА</span>
+            <span>III<span className="key-text-desktop">. КОМАНДА</span></span>
           </div>
         </div>
 
