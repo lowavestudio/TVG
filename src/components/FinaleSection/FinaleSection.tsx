@@ -57,28 +57,31 @@ export const FinaleSection: React.FC = () => {
     });
   }, []);
 
-  // Handle Video End
-  const handleVideoEnded = () => {
-    soundManager.playSelect();
-    setFinaleStep('unboxing');
+  // Direct smooth transition to music player
+  const goToMusic = () => {
+    soundManager.playChaChing();
+    launchCelebration();
+    setFinaleStep('music_karaoke');
+    // Immediate audio play attempt (synchronous within user gesture)
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch((err) => {
+        console.log('Audio autoplay policy, ready for user tap:', err);
+        setIsPlaying(false);
+      });
+    }
   };
 
-  // Trigger unboxing animation then transition to music
+  // Handle Video End
+  const handleVideoEnded = () => {
+    goToMusic();
+  };
+
+  // Trigger transition to music when clicking button
   const handleStartUnbox = () => {
-    soundManager.playChaChing();
-    setFinaleStep('unboxing');
-    launchCelebration();
-    setTimeout(() => {
-      setFinaleStep('music_karaoke');
-      // Autoplay audio on user interaction
-      if (audioRef.current) {
-        audioRef.current.play().then(() => {
-          setIsPlaying(true);
-        }).catch(() => {
-          setIsPlaying(false);
-        });
-      }
-    }, 2400);
+    goToMusic();
   };
 
   // Synchronize karaoke to real audio.currentTime
@@ -326,9 +329,19 @@ export const FinaleSection: React.FC = () => {
                   <span className="time-display">{formatTime(duration)}</span>
                 </div>
 
+                {!isPlaying && (
+                  <button 
+                    className="start-track-banner pulse-glow"
+                    onClick={toggleAudioPlay}
+                  >
+                    <Play size={16} />
+                    <span>ВКЛЮЧИТЬ ТРЕК</span>
+                  </button>
+                )}
+
                 <div className="player-buttons-row">
                   <button 
-                    className="player-btn play-main-btn"
+                    className={`player-btn play-main-btn ${!isPlaying ? 'pulse-glow' : ''}`}
                     onClick={toggleAudioPlay}
                     title={isPlaying ? 'Пауза' : 'Воспроизведение'}
                   >
