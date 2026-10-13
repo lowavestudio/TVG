@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Original loose root files (canonical copies are in public/)
+/TVG - KING OF TRAP.mp3
+/видео поздравление бросают цветы в камеру.mp4
+/логотип компании.webp
+/Обложка к треку.jpg
+/Фото директора.jpg
+/текст песни.txt
+/*.jpg
+/*.png
+/*.webp
+
