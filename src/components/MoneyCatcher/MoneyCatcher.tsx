@@ -689,52 +689,11 @@ export const MoneyCatcher: React.FC<MoneyCatcherProps> = ({ onComplete }) => {
         onTouchMove={handleTouchMove}
       >
         <canvas ref={canvasRef} className="game-canvas" />
+      </div>
 
-        {/* Victory Modal */}
-        {isVictory && (
-          <div className="victory-overlay fade-in">
-            <div className="victory-card">
-              <div className="victory-trophy-circle">
-                <Trophy size={56} className="gold-icon pulse-glow" />
-              </div>
-
-              <div className="victory-badge">
-                <ShieldCheck size={18} className="text-green" />
-                <span>ГЕНЕРАЛЬНАЯ ПОБЕДА</span>
-              </div>
-
-              <h2 className="victory-title gold-text">
-                ФИНАНСОВАЯ ИНТУИЦИЯ ГЕНЕРАЛЬНОГО СРАБОТАЛА!
-              </h2>
-
-              <p className="victory-text-highlight">
-                Штрафы, комиссии и маркетплейсы пытались помешать, но бюджет спасён.
-              </p>
-
-              <div className="victory-summary-box">
-                <p className="victory-summary">
-                  Итог: <strong>деньги пойманы</strong>. Авторитет не пострадал.
-                </p>
-                <div className="victory-stats-row">
-                  <span>Поймано мешков: <strong>5 / 5</strong></span>
-                  <span>•</span>
-                  <span>Итоговый капитал: <strong>{totalScore.toLocaleString('ru-RU')} ₽</strong></span>
-                </div>
-              </div>
-
-              <button 
-                className="cyber-button big-gold-button pulse-glow"
-                onClick={() => {
-                  soundManager.playSelect();
-                  onComplete();
-                }}
-              >
-                <span>ПЕРЕЙТИ К СЕКРЕТНОМУ ПОДАРКУ</span>
-                <Sparkles size={20} />
-              </button>
-            </div>
-          </div>
-        )}
+      {/* Target reminder banner */}
+      <div className="game-target-banner">
+        <span>Цель: поймать 5 мешков с деньгами 💰</span>
       </div>
 
       {/* Bottom Controls for Mobile / Touch / Quick Access */}
@@ -743,28 +702,70 @@ export const MoneyCatcher: React.FC<MoneyCatcherProps> = ({ onComplete }) => {
           className="touch-btn left"
           onMouseDown={() => handleMoveLeftBtn(true)}
           onMouseUp={() => handleMoveLeftBtn(false)}
-          onTouchStart={() => handleMoveLeftBtn(true)}
-          onTouchEnd={() => handleMoveLeftBtn(false)}
+          onTouchStart={(e) => { e.preventDefault(); handleMoveLeftBtn(true); }}
+          onTouchEnd={(e) => { e.preventDefault(); handleMoveLeftBtn(false); }}
         >
-          <ArrowLeft size={28} />
-          <span>ВЛЕВО (A)</span>
+          <ArrowLeft size={24} />
+          <span>ВЛЕВО</span>
         </button>
-
-        <div className="instructions-badge">
-          <span>Цель: поймать 5 мешков 💰</span>
-        </div>
 
         <button 
           className="touch-btn right"
           onMouseDown={() => handleMoveRightBtn(true)}
           onMouseUp={() => handleMoveRightBtn(false)}
-          onTouchStart={() => handleMoveRightBtn(true)}
-          onTouchEnd={() => handleMoveRightBtn(false)}
+          onTouchStart={(e) => { e.preventDefault(); handleMoveRightBtn(true); }}
+          onTouchEnd={(e) => { e.preventDefault(); handleMoveRightBtn(false); }}
         >
-          <span>ВПРАВО (D)</span>
-          <ArrowRight size={28} />
+          <span>ВПРАВО</span>
+          <ArrowRight size={24} />
         </button>
       </div>
+
+      {/* Victory Modal Overlay - Fixed Fullscreen */}
+      {isVictory && (
+        <div className="victory-overlay fade-in">
+          <div className="victory-card">
+            <div className="victory-trophy-circle">
+              <Trophy size={48} className="gold-icon pulse-glow" />
+            </div>
+
+            <div className="victory-badge">
+              <ShieldCheck size={16} className="text-green" />
+              <span>ГЕНЕРАЛЬНАЯ ПОБЕДА</span>
+            </div>
+
+            <h2 className="victory-title gold-text">
+              ФИНАНСОВАЯ ИНТУИЦИЯ ГЕНЕРАЛЬНОГО СРАБОТАЛА!
+            </h2>
+
+            <p className="victory-text-highlight">
+              Штрафы, комиссии и маркетплейсы пытались помешать, но бюджет спасён.
+            </p>
+
+            <div className="victory-summary-box">
+              <p className="victory-summary">
+                Итог: <strong>деньги пойманы</strong>. Авторитет не пострадал.
+              </p>
+              <div className="victory-stats-row">
+                <span>Мешки: <strong>5 / 5</strong></span>
+                <span>•</span>
+                <span>Капитал: <strong>{totalScore.toLocaleString('ru-RU')} ₽</strong></span>
+              </div>
+            </div>
+
+            <button 
+              className="cyber-button big-gold-button pulse-glow"
+              onClick={() => {
+                soundManager.playSelect();
+                onComplete();
+              }}
+            >
+              <span>ПЕРЕЙТИ К СЕКРЕТНОМУ ПОДАРКУ</span>
+              <Sparkles size={20} />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

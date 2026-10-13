@@ -96,13 +96,17 @@ export const FinaleSection: React.FC = () => {
         break;
       }
     }
-    setActiveLyricIndex(foundIndex);
+    if (foundIndex !== activeLyricIndex) {
+      setActiveLyricIndex(foundIndex);
 
-    // Auto-scroll active lyric into view
-    if (lyricsContainerRef.current) {
-      const activeEl = lyricsContainerRef.current.querySelector(`.lyric-item-${foundIndex}`) as HTMLElement;
-      if (activeEl) {
-        activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Auto-scroll ONLY inner lyrics container (never scroll window/page)
+      if (lyricsContainerRef.current) {
+        const container = lyricsContainerRef.current;
+        const activeEl = container.querySelector(`.lyric-item-${foundIndex}`) as HTMLElement;
+        if (activeEl) {
+          const targetTop = activeEl.offsetTop - container.offsetTop - (container.clientHeight / 2) + (activeEl.clientHeight / 2);
+          container.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+        }
       }
     }
   };
